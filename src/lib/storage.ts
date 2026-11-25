@@ -48,3 +48,22 @@ export async function getRecordingUrl(objectKey: string): Promise<string | null>
   if (!storage) return null;
   return storage.url(objectKey, { expiresIn: 3600 });
 }
+
+export async function uploadListeningAudio(params: {
+  userId: string;
+  audioBuffer: Buffer;
+  mimeType: string;
+}): Promise<{ objectKey: string; signedUrl: string } | null> {
+  const storage = getUploadsStorage();
+  if (!storage) return null;
+
+  const ext = params.mimeType.includes("mpeg") ? "mp3" : "wav";
+  const objectKey = `listening/${params.userId}/${Date.now()}.${ext}`;
+
+  await storage.upload(objectKey, params.audioBuffer, {
+    contentType: params.mimeType,
+  });
+
+  const signedUrl = await storage.url(objectKey, { expiresIn: 3600 });
+  return { objectKey, signedUrl };
+}

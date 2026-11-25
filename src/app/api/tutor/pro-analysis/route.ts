@@ -1,16 +1,21 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth";
-import { generateProAnalysis, getGeminiHttpError } from "@/lib/gemini";
+import {
+  generateProAnalysis,
+  getGeminiHttpError,
+  synthesizeRussianSpeech,
+} from "@/lib/gemini";
 import { canAccessProFeature } from "@/lib/usage";
 import { prisma } from "@/lib/prisma";
-import { uploadSpeechAudio } from "@/lib/storage";
+import { uploadListeningAudio, uploadSpeechAudio } from "@/lib/storage";
 
 const proSchema = z.object({
   type: z.enum(["pronunciation", "speaking", "listening", "errors"]),
   textInput: z.string().optional(),
   audioBase64: z.string().optional(),
   audioMimeType: z.string().optional(),
+  voiceName: z.enum(["Aoede", "Kore", "Puck", "Charon"]).optional(),
 });
 
 export async function POST(request: Request) {
@@ -66,7 +71,25 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ ...result, audioUrl });
+    let listeningAudioUrl: string | null = null;
+    if (parsed.data.type === "listening" && result.listeningScript) {
+      const tts = await synthesizeRussianSpeech(
+        result.listeningScript,
+        parsed.data.voiceName ?? "Aoede"
+      );
+      if (tts) {
+        const uploaded = await uploadListeningAudio({
+          userId: user.id,
+          audioBuffer: tts.audioBuffer,
+          mimeType: tts.mimeType,
+        });
+        if (uploaded) {
+          listeningAudioUrl = uploaded.signedUrl;
+        }
+      }
+    }
+
+    return NextResponse.json({ ...result, audioUrl, listeningAudioUrl });
   } catch (err) {
     console.error("Pro analysis error:", err);
     const { status, message } = getGeminiHttpError(err);

@@ -1,7 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { getLevelTitle } from "@/data/curriculum";
+import { pcmToWavBuffer } from "@/lib/audio";
 
 export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
+export const GEMINI_TTS_MODEL =
+  process.env.GEMINI_TTS_MODEL || "gemini-2.5-flash-preview-tts";
 
 function getClient(): GoogleGenAI | null {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
@@ -220,4 +223,61 @@ export async function generateProAnalysis(params: {
     summary: parsed.summary || "Анализ выполнен.",
     mistakes: Array.isArray(parsed.mistakes) ? parsed.mistakes : [],
   };
+}
+
+export type TtsVoiceName = "Aoede" | "Kore" | "Puck" | "Charon";
+
+/**
+ * Генерирует естественную русскую речь через Gemini TTS.
+ * При отсутствии ключа или ошибке TTS возвращает null, чтобы клиент использовал fallback.
+ */
+export async function synthesizeRussianSpeech(
+  text: string,
+  voiceName: TtsVoiceName = "Aoede"
+): Promise<{ audioBuffer: Buffer; mimeType: string } | null> {
+  const client = getClient();
+  if (!client || !text.trim()) return null;
+
+  try {
+    const response = await callWithRetry(() =>
+      client.models.generateContent({
+        model: GEMINI_TTS_MODEL,
+        contents: `Прочитай естественно и чётко на русском языке, с правильными ударениями и паузами:\n${text}`,
+        config: {
+          responseModalities: ["AUDIO"],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: {
+                voiceName,
+              },
+            },
+          },
+        },
+      })
+    );
+
+    const part = response.candidates?.[0]?.content?.parts?.find(
+      (p) => p.inlineData?.data
+    );
+    const inlineData = part?.inlineData;
+    if (!inlineData?.data) return null;
+
+    const rawBytes = Buffer.from(inlineData.data, "base64");
+    const mime = inlineData.mimeType || "audio/pcm";
+
+    if (mime.includes("pcm") || mime.includes("L16")) {
+      return {
+        audioBuffer: pcmToWavBuffer(rawBytes, 24000, 1, 16),
+        mimeType: "audio/wav",
+      };
+    }
+
+    return {
+      audioBuffer: rawBytes,
+      mimeType: mime,
+    };
+  } catch (err) {
+    console.warn("Gemini TTS fallback to browser speech:", err);
+    return null;
+  }
 }

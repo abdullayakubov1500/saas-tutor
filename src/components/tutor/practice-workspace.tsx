@@ -74,12 +74,16 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
 
   // Pro features state
   const [proText, setProText] = React.useState("");
+  const [voiceName, setVoiceName] = React.useState<"Aoede" | "Kore" | "Puck" | "Charon">("Aoede");
+  const [playbackSpeed, setPlaybackSpeed] = React.useState<0.75 | 1 | 1.15>(1);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
   const [proResult, setProResult] = React.useState<{
     score?: number;
     summary: string;
     mistakes?: Array<{ original: string; correction: string; rule: string }>;
     listeningScript?: string;
     listeningQuestion?: string;
+    listeningAudioUrl?: string | null;
   } | null>(null);
   const [recording, setRecording] = React.useState(false);
   const mediaRecorderRef = React.useRef<MediaRecorder | null>(null);
@@ -192,6 +196,7 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
           textInput: proText,
           audioBase64,
           audioMimeType,
+          voiceName,
         }),
       });
       const data = await res.json();
@@ -240,12 +245,23 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
     }
   }
 
+  React.useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = playbackSpeed;
+    }
+  }, [playbackSpeed, proResult?.listeningAudioUrl]);
+
   function speakRussian(text: string) {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "ru-RU";
-    utter.rate = 0.95;
+    utter.rate = playbackSpeed;
+    const voices = window.speechSynthesis.getVoices();
+    const preferred =
+      voices.find((v) => v.lang.startsWith("ru") && /natural|google|yandex|neural/i.test(v.name)) ||
+      voices.find((v) => v.lang.startsWith("ru"));
+    if (preferred) utter.voice = preferred;
     window.speechSynthesis.speak(utter);
   }
 
@@ -571,6 +587,39 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
                       <ProUpgradeNotice feature="Listening (Аудирование)" />
                     ) : (
                       <div className="space-y-4">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <div className="flex items-center gap-2 text-xs">
+                            <span className="text-muted-foreground">Диктор:</span>
+                            <select
+                              value={voiceName}
+                              onChange={(e) =>
+                                setVoiceName(e.target.value as "Aoede" | "Kore" | "Puck" | "Charon")
+                              }
+                              className="h-9 rounded-lg border border-input bg-background px-2.5 text-xs text-foreground"
+                            >
+                              <option value="Aoede">Алина (мягкий женский)</option>
+                              <option value="Kore">Елена (чёткий женский)</option>
+                              <option value="Charon">Дмитрий (спокойный мужской)</option>
+                              <option value="Puck">Артём (живой мужской)</option>
+                            </select>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 text-xs">
+                            <span className="text-muted-foreground">Скорость:</span>
+                            {([0.75, 1, 1.15] as const).map((spd) => (
+                              <Button
+                                key={spd}
+                                type="button"
+                                size="sm"
+                                variant={playbackSpeed === spd ? "default" : "outline"}
+                                onClick={() => setPlaybackSpeed(spd)}
+                              >
+                                {spd}x
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+
                         <Button
                           disabled={aiLoading}
                           onClick={() => runProAnalysis("listening")}
@@ -581,14 +630,28 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
                         </Button>
                         {proResult?.listeningScript && (
                           <div className="rounded-xl border border-border p-4 space-y-3">
-                            <Button
-                              variant="secondary"
-                              size="sm"
-                              onClick={() => speakRussian(proResult.listeningScript!)}
-                              className="gap-2"
-                            >
-                              <Volume2 className="h-4 w-4" /> Озвучить на русском
-                            </Button>
+                            {proResult.listeningAudioUrl ? (
+                              <div className="space-y-2">
+                                <div className="text-xs font-medium text-[#86612F]">
+                                  Нейросетевая озвучка (Gemini TTS)
+                                </div>
+                                <audio
+                                  ref={audioRef}
+                                  controls
+                                  src={proResult.listeningAudioUrl}
+                                  className="w-full"
+                                />
+                              </div>
+                            ) : (
+                              <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={() => speakRussian(proResult.listeningScript!)}
+                                className="gap-2"
+                              >
+                                <Volume2 className="h-4 w-4" /> Озвучить на русском
+                              </Button>
+                            )}
                             <p className="text-sm font-medium">
                               Вопрос: {proResult.listeningQuestion}
                             </p>
