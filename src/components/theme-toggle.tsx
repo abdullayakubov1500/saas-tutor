@@ -1,0 +1,42 @@
+"use client";
+
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
+
+export function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" aria-label="Переключить тему" disabled>
+        <Sun className="h-4 w-4" />
+      </Button>
+    );
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={isDark ? "Включить светлую тему" : "Включить тёмную тему"}
+      title={isDark ? "Светлая тема" : "Тёмная тема"}
+      className="border-border bg-card hover:bg-accent"
+    >
+      {isDark ? (
+        <Sun className="h-4 w-4 text-[#FAFAFA]" />
+      ) : (
+        <Moon className="h-4 w-4 text-[#52311B]" />
+      )}
+    </Button>
+  );
+}

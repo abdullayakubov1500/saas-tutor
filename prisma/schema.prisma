@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String           @id @default(cuid())
+  email                String           @unique
+  name                 String
+  passwordHash         String
+  plan                 String           @default("FREE") // FREE | PRO
+  level                String           @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
+  stripeCustomerId     String?          @unique
+  stripeSubscriptionId String?          @unique
+  subscriptionStatus   String?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  dailyUsages          DailyUsage[]
+  lessonProgress       LessonProgress[]
+}
+
+model DailyUsage {
+  id          String   @id @default(cuid())
+  userId      String
+  dateKey     String // YYYY-MM-DD (local or user-offset midnight boundary)
+  secondsUsed Int      @default(0)
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dateKey])
+}
+
+model LessonProgress {
+  id         String   @id @default(cuid())
+  userId     String
+  lessonSlug String
+  level      String
+  completed  Boolean  @default(false)
+  score      Int      @default(0)
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonSlug])
+}
