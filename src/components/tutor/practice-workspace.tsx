@@ -633,7 +633,7 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
                             {proResult.listeningAudioUrl ? (
                               <div className="space-y-2">
                                 <div className="text-xs font-medium text-[#86612F]">
-                                  Нейросетевая озвучка (Gemini TTS)
+                                  Нейросетевая озвучка (Neural TTS)
                                 </div>
                                 <audio
                                   ref={audioRef}
