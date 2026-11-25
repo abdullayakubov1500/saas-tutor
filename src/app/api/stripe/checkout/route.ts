@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { getStripeClient } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     const user = await getCurrentUser();
     if (!user) {
@@ -12,7 +12,8 @@ export async function POST() {
 
     const stripe = getStripeClient();
     const priceId = process.env.STRIPE_PRO_PRICE_ID?.trim();
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const origin = request.headers.get("origin");
+    const appUrl = origin || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
     if (!stripe || !priceId) {
       return NextResponse.json(
@@ -42,7 +43,7 @@ export async function POST() {
       customer: customerId,
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${appUrl}/learn?upgraded=1`,
+      success_url: `${appUrl}/learn?upgraded=1&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/pricing?canceled=1`,
       metadata: { userId: user.id },
     });
