@@ -3,24 +3,26 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model User {
-  id                   String           @id @default(cuid())
-  email                String           @unique
+  id                   String            @id @default(cuid())
+  email                String            @unique
   name                 String
   passwordHash         String
-  plan                 String           @default("FREE") // FREE | PRO
-  level                String           @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
-  stripeCustomerId     String?          @unique
-  stripeSubscriptionId String?          @unique
+  plan                 String            @default("FREE") // FREE | PRO
+  level                String            @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
+  stripeCustomerId     String?           @unique
+  stripeSubscriptionId String?           @unique
   subscriptionStatus   String?
-  createdAt            DateTime         @default(now())
-  updatedAt            DateTime         @updatedAt
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
   dailyUsages          DailyUsage[]
   lessonProgress       LessonProgress[]
+  speechRecordings     SpeechRecording[]
 }
 
 model DailyUsage {
@@ -45,4 +47,15 @@ model LessonProgress {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, lessonSlug])
+}
+
+model SpeechRecording {
+  id        String   @id @default(cuid())
+  userId    String
+  objectKey String
+  mimeType  String
+  score     Int?
+  summary   String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

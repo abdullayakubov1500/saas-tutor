@@ -3,6 +3,8 @@ import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth";
 import { generateProAnalysis, getGeminiHttpError } from "@/lib/gemini";
 import { canAccessProFeature } from "@/lib/usage";
+import { prisma } from "@/lib/prisma";
+import { uploadSpeechAudio } from "@/lib/storage";
 
 const proSchema = z.object({
   type: z.enum(["pronunciation", "speaking", "listening", "errors"]),
@@ -43,7 +45,28 @@ export async function POST(request: Request) {
       audioMimeType: parsed.data.audioMimeType,
     });
 
-    return NextResponse.json(result);
+    let audioUrl: string | null = null;
+    if (parsed.data.audioBase64 && parsed.data.audioMimeType) {
+      const uploaded = await uploadSpeechAudio({
+        userId: user.id,
+        audioBase64: parsed.data.audioBase64,
+        mimeType: parsed.data.audioMimeType,
+      });
+      if (uploaded) {
+        audioUrl = uploaded.signedUrl;
+        await prisma.speechRecording.create({
+          data: {
+            userId: user.id,
+            objectKey: uploaded.objectKey,
+            mimeType: parsed.data.audioMimeType,
+            score: result.score ?? null,
+            summary: result.summary,
+          },
+        });
+      }
+    }
+
+    return NextResponse.json({ ...result, audioUrl });
   } catch (err) {
     console.error("Pro analysis error:", err);
     const { status, message } = getGeminiHttpError(err);
