@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Слово AI — промо</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <style>
+    :root {
+      --background: #fafafa;
+      --foreground: #52311b;
+      --muted: #575c55;
+      --accent: #86612f;
+      --border: #d0d2cf;
+      --card: #ffffff;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "LINE Seed JP", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--background); }
+    body { font-family: var(--sans); color: var(--foreground); }
+
+    #root { position: relative; width: 1920px; height: 1080px; background: var(--background); overflow: hidden; }
+
+    /* soft warm glow that breathes subtly */
+    #glow {
+      position: absolute; inset: -200px;
+      background: radial-gradient(ellipse at 50% 45%, rgba(134,97,47,0.13) 0%, rgba(134,97,47,0) 60%);
+      pointer-events: none;
+    }
+
+    .clip { position: absolute; inset: 0; }
+    .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+    .h-hook { font-family: var(--serif); font-size: 170px; line-height: 1.05; color: var(--foreground); letter-spacing: 0.005em; }
+    .h-sub  { font-family: var(--serif); font-size: 104px; line-height: 1.1; color: var(--accent); font-style: italic; margin-top: 18px; }
+
+    .badge {
+      display: flex; align-items: center; gap: 28px;
+      padding: 30px 60px; border-radius: 36px; border: 2px solid var(--border); background: var(--card);
+    }
+    .star { font-size: 84px; color: var(--accent); line-height: 1; }
+    .brand { font-family: var(--serif); font-size: 128px; color: var(--foreground); line-height: 1; }
+    .tagline { font-size: 44px; color: var(--muted); margin-top: 36px; }
+
+    .title { font-family: var(--serif); font-size: 72px; color: var(--foreground); margin-bottom: 64px; }
+    .stages { display: flex; gap: 40px; }
+    .stage {
+      width: 380px; height: 300px; border-radius: 28px; background: var(--card);
+      border: 2px solid var(--border); padding: 40px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .stage .cefr { font-size: 30px; font-weight: 700; color: var(--accent); }
+    .stage .name { font-family: var(--serif); font-size: 52px; color: var(--foreground); line-height: 1.1; }
+
+    .app {
+      width: 1560px; height: 640px; border-radius: 32px; background: var(--card); border: 2px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .app-bar { height: 96px; border-bottom: 2px solid var(--border); display: flex; align-items: center; padding: 0 48px; font-size: 32px; color: var(--muted); }
+    .app-body { flex: 1; display: flex; gap: 48px; padding: 56px; }
+    .sentence-wrap { flex: 1; }
+    .label { font-size: 28px; color: var(--muted); margin-bottom: 22px; }
+    .sentence { font-family: var(--serif); font-size: 84px; color: var(--foreground); line-height: 1.25; }
+    .err { color: #9e2a2b; text-decoration: underline wavy #9e2a2b; text-underline-offset: 12px; }
+    .btn {
+      display: inline-block; margin-top: 56px; padding: 26px 60px; border-radius: 999px;
+      background: var(--accent); color: var(--background); font-size: 40px; font-weight: 700;
+    }
+    .rule-card {
+      width: 560px; border-radius: 26px; border: 2px solid var(--border); background: var(--background); padding: 40px;
+    }
+    .rule-card h3 { font-size: 40px; color: var(--accent); margin-bottom: 22px; }
+    .rule-card p { font-size: 34px; color: var(--foreground); line-height: 1.45; }
+
+    .tiles { display: flex; gap: 40px; }
+    .tile {
+      width: 480px; height: 360px; border-radius: 32px; background: var(--card); border: 2px solid var(--border);
+      padding: 48px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .tile .big { font-family: var(--serif); font-size: 64px; color: var(--foreground); line-height: 1.1; }
+    .tile .small { font-size: 32px; color: var(--muted); line-height: 1.4; }
+    .tile .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); }
+
+    .cta { display: inline-block; padding: 36px 88px; border-radius: 999px; background: var(--accent); color: var(--background); font-size: 56px; font-weight: 700; }
+    .foot { font-size: 34px; color: var(--muted); margin-top: 44px; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="root" data-width="1920" data-height="1080" data-duration="23.9">
+    <div id="glow"></div>
+
+    <!-- Scene 1: hook (0–3.0s) -->
+    <div class="clip center" data-start="0" data-duration="3.0" data-track-index="1">
+      <div class="h-hook" id="hook-1">Шесть падежей</div>
+      <div class="h-sub" id="hook-2">Один наставник</div>
+    </div>
+
+    <!-- Scene 2: reveal (3.0–7.9s) -->
+    <div class="clip center" data-start="3.0" data-duration="4.9" data-track-index="1">
+      <div class="badge" id="badge"><span class="star">✦</span><span class="brand">Слово AI</span></div>
+      <div class="tagline" id="tagline">Персональный AI-репетитор по русскому языку</div>
+    </div>
+
+    <!-- Scene 3: stages (7.9–12.6s) -->
+    <div class="clip center" data-start="7.9" data-duration="4.7" data-track-index="1">
+      <div class="title" id="stages-title">Четыре этапа мастерства</div>
+      <div class="stages">
+        <div class="stage" id="st1"><div class="cefr">A1–A2</div><div class="name">Начальный</div></div>
+        <div class="stage" id="st2"><div class="cefr">B1–B2</div><div class="name">Средний</div></div>
+        <div class="stage" id="st3"><div class="cefr">C1</div><div class="name">Продвинутый</div></div>
+        <div class="stage" id="st4"><div class="cefr">C2</div><div class="name">Эксперт</div></div>
+      </div>
+    </div>
+
+    <!-- Scene 4: working app, error explained (12.6–16.0s) -->
+    <div class="clip center" data-start="12.6" data-duration="3.4" data-track-index="1">
+      <div class="app" id="app">
+        <div class="app-bar">Практика · Начальный A1–A2</div>
+        <div class="app-body">
+          <div class="sentence-wrap">
+            <div class="label">Исправьте предложение</div>
+            <div class="sentence">Я вижу <span class="err">большую</span> дом</div>
+            <div class="btn" id="btn">Разобрать</div>
+          </div>
+          <div class="rule-card" id="rule">
+            <h3>Разбор ошибок</h3>
+            <p>«Дом» — мужской род, поэтому прилагательное: «большой дом».</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: features (16.0–20.7s) -->
+    <div class="clip center" data-start="16.0" data-duration="4.7" data-track-index="1">
+      <div class="tiles">
+        <div class="tile" id="t1"><div class="dot"></div><div><div class="big">5 уроков бесплатно</div></div><div class="small">Тариф Free: 10 минут практики в день</div></div>
+        <div class="tile" id="t2"><div class="dot"></div><div><div class="big">Speaking & Произношение</div></div><div class="small">Тариф Pro: разбор произношения</div></div>
+        <div class="tile" id="t3"><div class="dot"></div><div><div class="big">Listening</div></div><div class="small">Живые диалоги и проверка понимания</div></div>
+      </div>
+    </div>
+
+    <!-- Scene 6: outro (20.7–23.9s) -->
+    <div class="clip center" data-start="20.7" data-duration="3.2" data-track-index="1">
+      <div class="brand" id="outro-brand">Слово AI</div>
+      <div class="cta" id="cta">Начать 10 минут бесплатно</div>
+      <div class="foot" id="foot">Изучайте русский язык с персональным AI-наставником</div>
+    </div>
+
+    <!-- Audio: music bed + narration (Gemini TTS, voice Kore) + sparse SFX -->
+    <audio id="bg-music" data-start="0" data-duration="23.9" data-track-index="10" data-volume="0.16" data-fade-out="1.2" src="assets/music/happy-beats-business-moves-vol-9-by-ende-dot-app.mp3"></audio>
+    <audio id="vo-1" data-start="0.0" data-duration="2.61" data-track-index="20" data-volume="1" src="assets/voice/gemini/line1.wav"></audio>
+    <audio id="vo-2" data-start="3.0" data-duration="4.73" data-track-index="21" data-volume="1" src="assets/voice/gemini/line2.wav"></audio>
+    <audio id="vo-3" data-start="7.9" data-duration="4.47" data-track-index="22" data-volume="1" src="assets/voice/gemini/line3.wav"></audio>
+    <audio id="vo-4" data-start="12.6" data-duration="2.91" data-track-index="23" data-volume="1" src="assets/voice/gemini/line4.wav"></audio>
+    <audio id="vo-5" data-start="16.0" data-duration="4.36" data-track-index="24" data-volume="1" src="assets/voice/gemini/line5.wav"></audio>
+    <audio id="vo-6" data-start="20.7" data-duration="2.61" data-track-index="25" data-volume="1" src="assets/voice/gemini/line6.wav"></audio>
+
+    <audio id="sfx-st1" data-start="8.2" data-duration="0.11" data-track-index="31" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+    <audio id="sfx-st2" data-start="8.7" data-duration="0.11" data-track-index="31" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+    <audio id="sfx-st3" data-start="9.2" data-duration="0.11" data-track-index="31" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+    <audio id="sfx-st4" data-start="9.7" data-duration="0.11" data-track-index="31" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+    <audio id="sfx-click" data-start="13.0" data-duration="0.10" data-track-index="32" data-volume="0.6" src="assets/sfx/interface/click_001.ogg"></audio>
+    <audio id="sfx-t1" data-start="16.2" data-duration="0.19" data-track-index="33" data-volume="0.4" src="assets/sfx/interface/drop_002.ogg"></audio>
+    <audio id="sfx-t2" data-start="16.9" data-duration="0.19" data-track-index="33" data-volume="0.4" src="assets/sfx/interface/drop_002.ogg"></audio>
+    <audio id="sfx-t3" data-start="17.6" data-duration="0.19" data-track-index="33" data-volume="0.4" src="assets/sfx/interface/drop_002.ogg"></audio>
+    <audio id="sfx-bong-2" data-start="23.3" data-duration="0.13" data-track-index="34" data-volume="0.45" src="assets/sfx/interface/bong_001.ogg"></audio>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Scene 1 — hook (0–3.0s)
+    tl.fromTo("#hook-1", { opacity: 0.85, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.0);
+    tl.fromTo("#hook-2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.9);
+    tl.to("#hook-1, #hook-2", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.6);
+
+    // Scene 2 — reveal (3.0–7.9s)
+    tl.fromTo("#badge", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 3.2);
+    tl.fromTo("#tagline", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 4.0);
+    tl.to(["#badge", "#tagline"], { opacity: 0, duration: 0.3 }, 7.5);
+
+    // Scene 3 — stages (7.9–12.6s), cards one by one
+    tl.fromTo("#stages-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 8.0);
+    tl.fromTo("#st1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 8.2);
+    tl.fromTo("#st2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 8.7);
+    tl.fromTo("#st3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 9.2);
+    tl.fromTo("#st4", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 9.7);
+    tl.to(["#stages-title", "#st1", "#st2", "#st3", "#st4"], { opacity: 0, duration: 0.3 }, 12.2);
+
+    // Scene 4 — working app (12.6–16.0s); rule text holds ~2.6s before exit
+    tl.fromTo("#app", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.7);
+    tl.fromTo("#rule", { opacity: 0, x: 40 }, { opacity: 0.35, x: 0, duration: 0.01 }, 12.7);
+    tl.to("#btn", { scale: 0.94, duration: 0.12, ease: "power1.inOut" }, 12.95);
+    tl.to("#btn", { scale: 1, duration: 0.12, ease: "power1.out" }, 13.07);
+    tl.to("#rule", { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 13.2);
+    tl.to("#app", { opacity: 0, duration: 0.2 }, 15.8);
+
+    // Scene 5 — features (16.0–20.7s)
+    tl.fromTo("#t1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 16.2);
+    tl.fromTo("#t2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 16.9);
+    tl.fromTo("#t3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 17.6);
+    tl.to(["#t1", "#t2", "#t3"], { opacity: 0, duration: 0.3 }, 20.1);
+
+    // Scene 6 — outro (20.7–23.9s)
+    tl.fromTo("#outro-brand", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 20.8);
+    tl.fromTo("#cta", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.1);
+    tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 21.6);
+
+    // Ambient glow: slow breathe, no beat sync (no audio-reactive extraction available)
+    tl.to("#glow", { opacity: 0.6, duration: 4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = tl;
+  </script>
+</body>
+</html>

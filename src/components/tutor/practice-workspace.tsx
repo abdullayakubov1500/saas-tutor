@@ -8,12 +8,14 @@ import {
   Crown,
   Lock,
   Mic,
+  Radio,
   Send,
   Sparkles,
   Square,
   Volume2,
   XCircle,
 } from "lucide-react";
+import { Room, RoomEvent, Track } from "livekit-client";
 import { LESSONS, LEVELS, type Lesson, type LevelId } from "@/data/curriculum";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,6 +79,14 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
   const [voiceName, setVoiceName] = React.useState<"Aoede" | "Kore" | "Puck" | "Charon">("Aoede");
   const [playbackSpeed, setPlaybackSpeed] = React.useState<0.75 | 1 | 1.15>(1);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const audioCtxRef = React.useRef<AudioContext | null>(null);
+  const mediaSourceRef = React.useRef<MediaElementAudioSourceNode | null>(null);
+  const remoteAudioRef = React.useRef<HTMLAudioElement | null>(null);
+  const livekitRoomRef = React.useRef<Room | null>(null);
+  const [livekitStatus, setLivekitStatus] = React.useState<
+    "idle" | "connecting" | "connected" | "error"
+  >("idle");
+  const [livekitMessage, setLivekitMessage] = React.useState<string | null>(null);
   const [proResult, setProResult] = React.useState<{
     score?: number;
     summary: string;
@@ -250,6 +260,94 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
       audioRef.current.playbackRate = playbackSpeed;
     }
   }, [playbackSpeed, proResult?.listeningAudioUrl]);
+
+  React.useEffect(() => {
+    return () => {
+      livekitRoomRef.current?.disconnect();
+    };
+  }, []);
+
+  async function playViaLiveKit(scriptText: string, audioUrl?: string | null) {
+    setLivekitMessage(null);
+    setLivekitStatus("connecting");
+    try {
+      let room = livekitRoomRef.current;
+      if (!room || room.state !== "connected") {
+        const res = await fetch("/api/livekit/token", { method: "POST" });
+        const data = await res.json();
+        if (!res.ok) {
+          setLivekitStatus("error");
+          setLivekitMessage(data.error || "LiveKit недоступен");
+          return;
+        }
+
+        room = new Room();
+        room.on(RoomEvent.TrackSubscribed, (track) => {
+          if (track.kind === Track.Kind.Audio && remoteAudioRef.current) {
+            track.attach(remoteAudioRef.current);
+          }
+        });
+        room.on(RoomEvent.Disconnected, () => {
+          setLivekitStatus("idle");
+        });
+
+        await room.connect(data.url, data.token);
+        livekitRoomRef.current = room;
+      }
+
+      setLivekitStatus("connected");
+
+      // Отправляем задание в DataChannel комнаты LiveKit (для LiveKit Voice Agent)
+      const payload = new TextEncoder().encode(
+        JSON.stringify({
+          type: "listening_tts",
+          text: scriptText,
+          voiceName,
+          speed: playbackSpeed,
+        })
+      );
+      await room.localParticipant.publishData(payload, { reliable: true });
+
+      // Потоковая передача аудио в WebRTC-комнату LiveKit + локальное воспроизведение
+      if (audioUrl) {
+        const audio = audioRef.current ?? new Audio(audioUrl);
+        audio.crossOrigin = "anonymous";
+        audio.src = audioUrl;
+        audio.playbackRate = playbackSpeed;
+
+        const AudioCtx = window.AudioContext;
+        if (AudioCtx) {
+          const ctx = audioCtxRef.current ?? new AudioCtx();
+          audioCtxRef.current = ctx;
+          if (ctx.state === "suspended") {
+            await ctx.resume();
+          }
+          if (!mediaSourceRef.current) {
+            const source = ctx.createMediaElementSource(audio);
+            mediaSourceRef.current = source;
+            const dest = ctx.createMediaStreamDestination();
+            source.connect(dest);
+            source.connect(ctx.destination);
+            const [mediaTrack] = dest.stream.getAudioTracks();
+            if (mediaTrack) {
+              await room.localParticipant.publishTrack(mediaTrack, {
+                name: "listening-tts",
+              });
+            }
+          }
+        }
+        await audio.play();
+        setLivekitMessage(`Озвучка идёт через LiveKit комнату (${room.name})`);
+      } else {
+        speakRussian(scriptText);
+        setLivekitMessage(`Подключено к LiveKit (${room.name}), отправлен DataChannel`);
+      }
+    } catch (err) {
+      console.error("LiveKit playback error:", err);
+      setLivekitStatus("error");
+      setLivekitMessage("Не удалось подключиться к LiveKit WebRTC");
+    }
+  }
 
   function speakRussian(text: string) {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -630,6 +728,48 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
                         </Button>
                         {proResult?.listeningScript && (
                           <div className="rounded-xl border border-border p-4 space-y-3">
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  type="button"
+                                  size="sm"
+                                  variant={livekitStatus === "connected" ? "secondary" : "default"}
+                                  disabled={livekitStatus === "connecting"}
+                                  onClick={() =>
+                                    playViaLiveKit(
+                                      proResult.listeningScript!,
+                                      proResult.listeningAudioUrl
+                                    )
+                                  }
+                                  className="gap-2"
+                                >
+                                  <Radio className="h-4 w-4" />
+                                  {livekitStatus === "connecting"
+                                    ? "Подключение LiveKit..."
+                                    : "Озвучить через LiveKit"}
+                                </Button>
+                                <Badge variant={livekitStatus === "connected" ? "pro" : "outline"}>
+                                  {livekitStatus === "connected"
+                                    ? "LiveKit Connected"
+                                    : "LiveKit WebRTC"}
+                                </Badge>
+                              </div>
+                            </div>
+
+                            {livekitMessage && (
+                              <div
+                                className={`text-xs ${
+                                  livekitStatus === "error"
+                                    ? "text-destructive"
+                                    : "text-muted-foreground"
+                                }`}
+                              >
+                                {livekitMessage}
+                              </div>
+                            )}
+
+                            <audio ref={remoteAudioRef} autoPlay className="hidden" />
+
                             {proResult.listeningAudioUrl ? (
                               <div className="space-y-2">
                                 <div className="text-xs font-medium text-[#86612F]">
@@ -638,6 +778,7 @@ export function PracticeWorkspace({ initialUser, initialUsage }: PracticeWorkspa
                                 <audio
                                   ref={audioRef}
                                   controls
+                                  crossOrigin="anonymous"
                                   src={proResult.listeningAudioUrl}
                                   className="w-full"
                                 />

@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "historyId": "cac7850d-b36c-450d-a06d-6a38f41b020d",
+  "currentRevision": "96c1e634-118f-448c-90af-e84f0742c6e5",
+  "pendingChanges": false,
+  "files": {
+    "assets/sfx/interface/bong_001.ogg": {
+      "hash": "d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\d2\\d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710"
+    },
+    "assets/sfx/interface/click_001.ogg": {
+      "hash": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\cc\\ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9"
+    },
+    "assets/sfx/interface/drop_001.ogg": {
+      "hash": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\69\\692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af"
+    },
+    "assets/sfx/interface/drop_002.ogg": {
+      "hash": "4ac4d1cef7e936965cbf795852ca2020300b9e2ba7daa59f2bf4f1f7bf416218",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\4a\\4ac4d1cef7e936965cbf795852ca2020300b9e2ba7daa59f2bf4f1f7bf416218"
+    },
+    "assets/voice/line1.wav": {
+      "hash": "55e6982196673958d2df931e0486b24ab8cbdf1555e3f8e2eba3b6c96bda2f0a",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\55\\55e6982196673958d2df931e0486b24ab8cbdf1555e3f8e2eba3b6c96bda2f0a"
+    },
+    "assets/voice/line2.wav": {
+      "hash": "d9fede337d279e54f0f644662d37c0cc623a455f20842292541ac9b3e27d6d26",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\d9\\d9fede337d279e54f0f644662d37c0cc623a455f20842292541ac9b3e27d6d26"
+    },
+    "assets/voice/line3.wav": {
+      "hash": "13cc12ae8a3d0c6e946d68a48d23342d5922b78dac01d4a44b475b7d69267fb8",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\13\\13cc12ae8a3d0c6e946d68a48d23342d5922b78dac01d4a44b475b7d69267fb8"
+    },
+    "assets/voice/line4.wav": {
+      "hash": "aa1172fe0d857405f572bb651149694b54baab8117699aa9b6e256f906f62113",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\aa\\aa1172fe0d857405f572bb651149694b54baab8117699aa9b6e256f906f62113"
+    },
+    "assets/voice/line5.wav": {
+      "hash": "1f419904c9784a65bebf77c5a3b7174933c6e7e53d61a75df8ef05e14ab5f57a",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\1f\\1f419904c9784a65bebf77c5a3b7174933c6e7e53d61a75df8ef05e14ab5f57a"
+    },
+    "assets/voice/line6.wav": {
+      "hash": "0d124277ea82aebb2e52c83ae463a209ac91c0481b788b262939e8b00ebe3d3e",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\0d\\0d124277ea82aebb2e52c83ae463a209ac91c0481b788b262939e8b00ebe3d3e"
+    },
+    "index.html": {
+      "hash": "6f4c899336bf0442f01911dd522ee3841f256e544107c9f95bd0f823bd921855",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\6f\\6f4c899336bf0442f01911dd522ee3841f256e544107c9f95bd0f823bd921855"
+    },
+    "assets/music/happy-beats-business-moves-vol-9-by-ende-dot-app.mp3": {
+      "hash": "f5793597e520aa8fa9cce91086816fc1e15e3aac0128bcf375df51ba70c0dc63",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\f5\\f5793597e520aa8fa9cce91086816fc1e15e3aac0128bcf375df51ba70c0dc63"
+    },
+    "assets/voice/gemini/line1.wav": {
+      "hash": "0d4a2753c8ac7c7fea4d32c359e9c67b1e7be82e92987e21de0a29a83ccf7436",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\0d\\0d4a2753c8ac7c7fea4d32c359e9c67b1e7be82e92987e21de0a29a83ccf7436"
+    },
+    "assets/voice/gemini/line2.wav": {
+      "hash": "9e1bd6dc47699f484e8111f3122d7315a4649ecaeef7bb3ad868acb5284e6cf7",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\9e\\9e1bd6dc47699f484e8111f3122d7315a4649ecaeef7bb3ad868acb5284e6cf7"
+    },
+    "assets/voice/gemini/line3.wav": {
+      "hash": "3f17baad516c25d9dfa12673dd0cfc9b83e1e9bf08d6985440c9ab4c4db762d6",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\3f\\3f17baad516c25d9dfa12673dd0cfc9b83e1e9bf08d6985440c9ab4c4db762d6"
+    },
+    "assets/voice/gemini/line4.wav": {
+      "hash": "06754974dc636c6ced6a5e126c00657676280d4f51024cae465389358f406930",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\06\\06754974dc636c6ced6a5e126c00657676280d4f51024cae465389358f406930"
+    },
+    "assets/voice/gemini/line5.wav": {
+      "hash": "440689c4dc7138021dc3008824f7bbef672d23d119bc99dab03ba60a2653739a",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\44\\440689c4dc7138021dc3008824f7bbef672d23d119bc99dab03ba60a2653739a"
+    },
+    "assets/voice/gemini/line6.wav": {
+      "hash": "27d106178bc81e23b799263a0c74168e4b2f0efd5c533dba1d23ba3be25385cc",
+      "content": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\27\\27d106178bc81e23b799263a0c74168e4b2f0efd5c533dba1d23ba3be25385cc"
+    }
+  },
+  "revisions": {
+    "92aa4b56-369d-468d-9c1c-5cacea72fdcc": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795862266876,
+      "endedAt": 1795862266883,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\cf\\cf5d9cfcf0ad1f4bcf21bd178e7a7e0ab289dd4047d5073cdf450702a343abc6",
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\02\\026a99524927dc93318bcad716450a82a91a878cf56fb0c7867d902da06c6d05"
+        }
+      }
+    },
+    "96c1e634-118f-448c-90af-e84f0742c6e5": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795863014374,
+      "endedAt": 1795863014393,
+      "files": {
+        "assets/voice/gemini/line1.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\0d\\0d4a2753c8ac7c7fea4d32c359e9c67b1e7be82e92987e21de0a29a83ccf7436"
+        },
+        "assets/voice/gemini/line2.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\9e\\9e1bd6dc47699f484e8111f3122d7315a4649ecaeef7bb3ad868acb5284e6cf7"
+        },
+        "assets/voice/gemini/line3.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\3f\\3f17baad516c25d9dfa12673dd0cfc9b83e1e9bf08d6985440c9ab4c4db762d6"
+        },
+        "assets/voice/gemini/line4.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\06\\06754974dc636c6ced6a5e126c00657676280d4f51024cae465389358f406930"
+        },
+        "assets/voice/gemini/line5.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\44\\440689c4dc7138021dc3008824f7bbef672d23d119bc99dab03ba60a2653739a"
+        },
+        "assets/voice/gemini/line6.wav": {
+          "before": null,
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\27\\27d106178bc81e23b799263a0c74168e4b2f0efd5c533dba1d23ba3be25385cc"
+        },
+        "index.html": {
+          "before": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\02\\026a99524927dc93318bcad716450a82a91a878cf56fb0c7867d902da06c6d05",
+          "after": "C:\\Users\\Abdulla\\.cache\\hyperframes\\history\\cac7850d-b36c-450d-a06d-6a38f41b020d\\blobs\\6f\\6f4c899336bf0442f01911dd522ee3841f256e544107c9f95bd0f823bd921855"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "96c1e634-118f-448c-90af-e84f0742c6e5",
+      "id": "7f745db7-a647-4cda-a74d-b7e507e8486e"
+    },
+    "revisions": {
+      "92aa4b56-369d-468d-9c1c-5cacea72fdcc": [
+        {
+          "id": "f3f80794-cfbe-4cdd-a699-94de89091e8a",
+          "scope": "project",
+          "report": "D:\\work\\Students\\wed1500\\24\\sass-tutor\\brag-output-2026-11-28-153441\\composition\\.hyperframes\\artifacts\\checks\\f3f80794-cfbe-4cdd-a699-94de89091e8a.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "cache": true,
+              "contrast": true,
+              "craft": true,
+              "strict": false,
+              "snapshots": false,
+              "safeZones": [
+                "tiktok",
+                "reels",
+                "shorts"
+              ],
+              "browserGpuMode": "auto",
+              "includeUnmounted": false
+            }
+          },
+          "createdAt": 1795862285270,
+          "contentHash": "dcaf74a40dce757db22050d0d503b27d4d581276aae3d35949563f927168d147",
+          "revision": "92aa4b56-369d-468d-9c1c-5cacea72fdcc",
+          "inputFingerprint": "dfe8ca176492ec06f0d6a1fe1e2b69fd5cce99016ea588b014ef79d657c1aae7",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ],
+      "96c1e634-118f-448c-90af-e84f0742c6e5": [
+        {
+          "id": "7f745db7-a647-4cda-a74d-b7e507e8486e",
+          "scope": "project",
+          "report": "D:\\work\\Students\\wed1500\\24\\sass-tutor\\brag-output-2026-11-28-153441\\composition\\.hyperframes\\artifacts\\checks\\7f745db7-a647-4cda-a74d-b7e507e8486e.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "cache": true,
+              "contrast": true,
+              "craft": true,
+              "strict": false,
+              "snapshots": false,
+              "safeZones": [
+                "tiktok",
+                "reels",
+                "shorts"
+              ],
+              "browserGpuMode": "auto",
+              "includeUnmounted": false
+            }
+          },
+          "createdAt": 1795863027875,
+          "contentHash": "73cb360d4fcd3cb24737b82bea69d01b2c0182f303a8c3460493ad3f27f109ad",
+          "revision": "96c1e634-118f-448c-90af-e84f0742c6e5",
+          "inputFingerprint": "2f29fc27fab1e3964496b158dc617b7987246a6a8f2da74e92e191ec1c1455e3",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "79ee068c-617b-4429-b1c9-bfbb51570495",
+        "scope": "project",
+        "report": "D:\\work\\Students\\wed1500\\24\\sass-tutor\\brag-output-2026-11-28-153441\\composition\\.hyperframes\\artifacts\\checks\\79ee068c-617b-4429-b1c9-bfbb51570495.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 45000,
+            "cache": true,
+            "contrast": true,
+            "craft": true,
+            "strict": false,
+            "snapshots": false,
+            "safeZones": [
+              "tiktok",
+              "reels",
+              "shorts"
+            ],
+            "browserGpuMode": "auto",
+            "includeUnmounted": false
+          }
+        },
+        "createdAt": 1795862247405,
+        "contentHash": "bdc9c9eefaef5d6118d4abf79b88a5879ff0274ecb540f4f28a25392b3a90179",
+        "revision": null,
+        "inputFingerprint": "93d22c4902e6aefbe733c361e6f209feb2476dfbb374c64740a7b05c24c5ed78",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "c1af1a23-a81a-4830-8475-aa8c948ce5f7",
+      "completedAt": 1795863083656,
+      "output": "D:\\work\\Students\\wed1500\\24\\sass-tutor\\brag-output-2026-11-28-153441\\brag.mp4",
+      "status": "completed",
+      "revision": "96c1e634-118f-448c-90af-e84f0742c6e5"
+    },
+    "retainedRevisions": [
+      "96c1e634-118f-448c-90af-e84f0742c6e5",
+      "92aa4b56-369d-468d-9c1c-5cacea72fdcc"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}
